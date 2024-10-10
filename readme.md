@@ -46,4 +46,8 @@ db - h2
 
 # API 명세
 
+![img_1.png](img_1.png)
+
+
+[swagger.json](swagger.json)
 

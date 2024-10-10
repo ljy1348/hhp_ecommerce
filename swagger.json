@@ -1,0 +1,528 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/payment": {
+      "post": {
+        "tags": [
+          "payment-conroller"
+        ],
+        "operationId": "payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/order": {
+      "post": {
+        "tags": [
+          "order-controller"
+        ],
+        "operationId": "addOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/add/{userId}": {
+      "post": {
+        "tags": [
+          "cart-controller"
+        ],
+        "operationId": "addCart",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartProductDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartListDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/point/charge/{userId}": {
+      "patch": {
+        "tags": [
+          "point-controller"
+        ],
+        "operationId": "chargePoint",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PointChargeDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/list/{page}": {
+      "get": {
+        "tags": [
+          "product-conroller"
+        ],
+        "operationId": "getProductList",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/list/popular": {
+      "get": {
+        "tags": [
+          "product-conroller"
+        ],
+        "operationId": "getProductPopular",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/detail/{productId}": {
+      "get": {
+        "tags": [
+          "product-conroller"
+        ],
+        "operationId": "getProductDetail",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDetailDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/point/get/{userId}": {
+      "get": {
+        "tags": [
+          "point-controller"
+        ],
+        "operationId": "getPoint",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PointResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/get/{userId}": {
+      "get": {
+        "tags": [
+          "cart-controller"
+        ],
+        "operationId": "getCart",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartListDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/delete/{userId}": {
+      "delete": {
+        "tags": [
+          "cart-controller"
+        ],
+        "operationId": "deleteCart",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartProductDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartListDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentRequestDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PaymentResponseDto": {
+        "type": "object",
+        "properties": {
+          "paymentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "result": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OrderProductDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OrderRequestDto": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderProductDto"
+            }
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OrderResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CartProductDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "CartListDto": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDto"
+            }
+          }
+        }
+      },
+      "ProductDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PointChargeDto": {
+        "type": "object",
+        "properties": {
+          "chargePoint": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PointResponseDto": {
+        "type": "object",
+        "properties": {
+          "point": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ProductListDto": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDto"
+            }
+          }
+        }
+      },
+      "ProductDetailDto": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
