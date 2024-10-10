@@ -1,3 +1,6 @@
+[Step 5](#step-5)  
+[Step 6](#step-6)
+
 # step 5
 # 마일스톤
 
@@ -12,3 +15,35 @@ https://github.com/users/ljy1348/projects/4/views/1
 ![order.png](order.png)
 3. 장바구니 등록
 ![cart.png](cart.png)
+
+# step 6
+# ERD
+![erd.png](erd.png)
+
+# 기술
+아키택처 - 클린 아키택처  
+```
+domain
+├── model
+└── repository
+application
+├── service
+└── pacade
+inter
+├── controller
+├── dto
+└── adapter
+infrastructure
+├── config
+├── repository
+    └─ entity
+└── client
+```
+db orm - jpa  
+test - JUnit & AssertJ  
+java - openjdk 17  
+db - h2  
+
+# API 명세
+
+
