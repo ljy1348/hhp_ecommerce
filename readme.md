@@ -9,11 +9,11 @@
 https://github.com/users/ljy1348/projects/4/views/1
 
 # 시퀀스 다이어그램
-1. 포인트 조회/충전
+1. 포인트 조회/충전  
 ![point.png](point.png)
-2. 상품 주문 및 결제
+2. 상품 주문 및 결제  
 ![order.png](order.png)
-3. 장바구니 등록
+3. 장바구니 등록  
 ![cart.png](cart.png)
 
 # step 6
