@@ -1,7 +1,7 @@
-package com.example.hhp_ecommerce.inter.controller;
+package com.example.hhp_ecommerce.web.controller;
 
-import com.example.hhp_ecommerce.inter.dto.payment.PaymentRequestDto;
-import com.example.hhp_ecommerce.inter.dto.payment.PaymentResponseDto;
+import com.example.hhp_ecommerce.web.dto.payment.PaymentRequestDto;
+import com.example.hhp_ecommerce.web.dto.payment.PaymentResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

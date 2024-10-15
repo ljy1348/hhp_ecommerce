@@ -1,4 +1,4 @@
-package com.example.hhp_ecommerce.inter.dto.product;
+package com.example.hhp_ecommerce.web.dto.product;
 
 import java.util.List;
 

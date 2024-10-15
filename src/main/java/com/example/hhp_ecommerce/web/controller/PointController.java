@@ -1,7 +1,7 @@
-package com.example.hhp_ecommerce.inter.controller;
+package com.example.hhp_ecommerce.web.controller;
 
-import com.example.hhp_ecommerce.inter.dto.point.PointChargeDto;
-import com.example.hhp_ecommerce.inter.dto.point.PointResponseDto;
+import com.example.hhp_ecommerce.web.dto.point.PointChargeDto;
+import com.example.hhp_ecommerce.web.dto.point.PointResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
