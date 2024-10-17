@@ -44,4 +44,8 @@ public class ProductQuantityJapAdapter implements ProductQuantityRepository {
     public List<Product> findAll() {
         return productQuantityJpaRepository.findAll().stream().map(ProductQuantityJpaEntity::toDomain).collect(Collectors.toList());
     }
+
+    public List<Product> findAllById(List<Long> ids) {
+        return productQuantityJpaRepository.findAllByIdIn(ids).stream().map(ProductQuantityJpaEntity::toDomain).collect(Collectors.toList());
+    }
 }

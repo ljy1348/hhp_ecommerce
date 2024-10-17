@@ -7,4 +7,6 @@ public interface ProductUseCase {
     ProductDetailDto getProductDetail(long productId);
 
     ProductListDto getProductList();
+
+    ProductListDto getProductListTop5();
 }

@@ -8,13 +8,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "order_product")
-public class OrderProductJpaEntity {
+public class OrderProductJpaEntity extends BaseTimeEntity {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,15 @@ public class OrderProductJpaEntity {
         private int quantity;
         private int price;
 
+    OrderProductJpaEntity(long id, long orderId, long productId, int quantity, int price, LocalDateTime createdAt) {
+        this.id = id;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.price = price;
+        this.createDate = createdAt;
+    }
+
     public OrderProduct toDomain() {
         return new OrderProduct(
                 this.id,
@@ -31,6 +42,7 @@ public class OrderProductJpaEntity {
                 this.productId
                 ,this.quantity
                 ,this.price
+                ,this.createDate
         );
     }
 
@@ -41,6 +53,7 @@ public class OrderProductJpaEntity {
                 orderProduct.getProductId(),
                 orderProduct.getQuantity(),
                 orderProduct.getPrice()
+                ,orderProduct.getCreateDate()
         );
     }
 }

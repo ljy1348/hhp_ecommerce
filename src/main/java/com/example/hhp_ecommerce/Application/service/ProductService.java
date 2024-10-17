@@ -30,6 +30,10 @@ public class ProductService {
         return productRepository.findAllByProducts(productIds);
     }
 
+    public List<Product> findAllByIds(List<Long> ids) {
+        return productRepository.findAllByProducts(ids);
+    }
+
     public Product getProductDetail(Long id) {
         Product product1 = productRepository.getById(id);
         Product product2 = productQuantityRepository.getById(id);
@@ -44,6 +48,10 @@ public class ProductService {
 
     public List<Product> findAllQuantity() {
         return productQuantityRepository.findAll();
+    }
+
+    public List<Product> findAllQuantityByIds(List<Long> ids) {
+        return productQuantityRepository.findAllById(ids);
     }
 
     public List<Product> findAllProductQuantityWithLock(List<Product> products) {

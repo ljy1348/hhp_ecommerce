@@ -3,8 +3,10 @@ package com.example.hhp_ecommerce.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
-public class OrderProduct {
+public class OrderProduct extends BaseTime {
     private long id;
     @Setter
     private long orderId;
@@ -19,11 +21,12 @@ public class OrderProduct {
         this.price = price;
     }
 
-    public OrderProduct(long id, long orderId, long productId, int quantity, int price) {
+    public OrderProduct(long id, long orderId, long productId, int quantity, int price, LocalDateTime date) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+        this.createDate = date;
     }
 }

@@ -2,8 +2,11 @@ package com.example.hhp_ecommerce.domain.repository;
 
 import com.example.hhp_ecommerce.domain.OrderProduct;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderProductRepository {
     List<OrderProduct> createOrderProductList(List<OrderProduct> orderProductList);
+    List<OrderProduct> getOrderProductCreateDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
