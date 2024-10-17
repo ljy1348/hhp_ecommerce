@@ -1,6 +1,5 @@
-package com.example.hhp_ecommerce.Application.mapping;
+package com.example.hhp_ecommerce.Application.mapper;
 
-import com.example.hhp_ecommerce.domain.OrderProduct;
 import com.example.hhp_ecommerce.domain.Product;
 import com.example.hhp_ecommerce.interfaces.dto.order.OrderProductDto;
 import com.example.hhp_ecommerce.interfaces.dto.order.OrderRequestDto;
@@ -8,7 +7,7 @@ import com.example.hhp_ecommerce.interfaces.dto.order.OrderRequestDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductMapping {
+public class ProductMapper {
 
     public static List<Product> mapToProductList(OrderRequestDto orderRequestDto) {
         List<OrderProductDto> list = orderRequestDto.products();

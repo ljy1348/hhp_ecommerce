@@ -1,10 +1,10 @@
-package com.example.hhp_ecommerce.Application.mapping;
+package com.example.hhp_ecommerce.Application.mapper;
 
 import com.example.hhp_ecommerce.domain.Order;
 import com.example.hhp_ecommerce.interfaces.dto.order.OrderRequestDto;
 import com.example.hhp_ecommerce.interfaces.dto.order.OrderResponseDto;
 
-public class OrderMapping {
+public class OrderMapper {
     public static Order orderRequestDtoToDomain(OrderRequestDto orderRequestDto) {
         return new Order(orderRequestDto.userId());
     }

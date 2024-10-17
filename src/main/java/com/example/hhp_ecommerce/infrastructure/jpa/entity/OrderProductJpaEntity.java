@@ -2,10 +2,7 @@ package com.example.hhp_ecommerce.infrastructure.jpa.entity;
 
 import com.example.hhp_ecommerce.domain.Order;
 import com.example.hhp_ecommerce.domain.OrderProduct;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "order_product")
 public class OrderProductJpaEntity {
 
         @Id

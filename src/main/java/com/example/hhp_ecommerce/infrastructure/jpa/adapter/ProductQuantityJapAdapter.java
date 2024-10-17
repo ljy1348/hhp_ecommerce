@@ -19,8 +19,8 @@ public class ProductQuantityJapAdapter implements ProductQuantityRepository {
     private final ProductQuantityJpaRepository productQuantityJpaRepository;
 
     @Override
-    public List<Product> findAllByProductId(List<Long> ids) {
-        return productQuantityJpaRepository.findAllById(ids).stream()
+    public List<Product> findAllByProductIdWithLock(List<Long> ids) {
+        return productQuantityJpaRepository.findAllByIdIn(ids).stream()
                 .map(ProductQuantityJpaEntity::toDomain)
                 .collect(Collectors.toList());
     }

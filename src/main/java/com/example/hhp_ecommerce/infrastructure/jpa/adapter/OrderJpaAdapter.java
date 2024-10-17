@@ -16,4 +16,9 @@ public class OrderJpaAdapter implements OrderRepository {
         OrderJpaEntity orderJpaEntity = OrderJpaEntity.toJpaEntity(order);
         return orderJpaRepository.save(orderJpaEntity).toDomain();
     }
+
+    @Override
+    public Order getById(long id) {
+        return orderJpaRepository.getById(id).toDomain();
+    }
 }

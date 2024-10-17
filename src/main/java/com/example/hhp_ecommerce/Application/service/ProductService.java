@@ -26,11 +26,11 @@ public class ProductService {
         return productRepository.findAllByProducts(productIds);
     }
 
-    public List<Product> findAllProductQuantitys(List<Product> products) {
+    public List<Product> findAllProductQuantityWithLock(List<Product> products) {
         List<Long> productIds = products.stream()
                 .map(Product::getId) // productId 추출
                 .collect(Collectors.toList());
-        return productQuantityRepository.findAllByProductId(productIds);
+        return productQuantityRepository.findAllByProductIdWithLock(productIds);
     }
 
     public List<Product> saveAllProductQuantity(List<Product> products) {

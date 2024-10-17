@@ -1,7 +1,7 @@
 package com.example.hhp_ecommerce.Application.facade;
 
-import com.example.hhp_ecommerce.Application.mapping.OrderMapping;
-import com.example.hhp_ecommerce.Application.mapping.ProductMapping;
+import com.example.hhp_ecommerce.Application.mapper.OrderMapper;
+import com.example.hhp_ecommerce.Application.mapper.ProductMapper;
 import com.example.hhp_ecommerce.Application.service.OrderProductService;
 import com.example.hhp_ecommerce.Application.service.OrderService;
 import com.example.hhp_ecommerce.Application.service.ProductService;
@@ -27,10 +27,10 @@ public class OrderFacade implements OrderUseCase {
     @Transactional
     @Override
     public OrderResponseDto order(OrderRequestDto orderRequestDto) {
-        Order order = OrderMapping.orderRequestDtoToDomain(orderRequestDto);
-        List<Product> orderProducts = ProductMapping.mapToProductList(orderRequestDto);
+        Order order = OrderMapper.orderRequestDtoToDomain(orderRequestDto);
+        List<Product> orderProducts = ProductMapper.mapToProductList(orderRequestDto);
         List<Product> products = productService.findAllByProducts(orderProducts);
-        List<Product> productQuantitys = productService.findAllProductQuantitys(orderProducts);
+        List<Product> productQuantitys = productService.findAllProductQuantityWithLock(orderProducts);
         productService.isOrderQuantityAvailableAndUpdate(productQuantitys, orderProducts);
         List<Product> updateProducts = productService.updateOrderListWithProductPrices(products, orderProducts);
         int totalAmount = productService.calculateTotalPrice(updateProducts);
@@ -41,7 +41,7 @@ public class OrderFacade implements OrderUseCase {
         createOrder.updateStatus(Order.OrderStatus.PAYMENT_PENDING);
         productService.saveAllProductQuantity(productQuantitys);
         orderService.updateOrder(createOrder);
-        return OrderMapping.domainToOrderResponseDto(createOrder);
+        return OrderMapper.domainToOrderResponseDto(createOrder);
     }
 
 }

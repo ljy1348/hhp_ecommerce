@@ -18,4 +18,8 @@ public class OrderService {
     public Order updateOrder(Order order) {
         return orderRepository.save(order);
     }
+
+    public Order findById(long orderId) {
+        return orderRepository.getById(orderId);
+    }
 }
