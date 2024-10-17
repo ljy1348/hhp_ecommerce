@@ -1,6 +1,7 @@
 # 4주차
 
-[step7 readme - API Swagger 기능 구현 및 캡쳐본 첨부](docs%2Fstep7.md)
+[step7 readme - API Swagger 기능 구현 및 캡쳐본 첨부](docs%2Fstep7.md)  
+[step8 readme - 통합 테스트 결과](docs%2Fstep%208.md)
 
 ### **`DEFAULT`**
 - 각 시나리오별 하기 **비즈니스 로직** 개발 및 **단위 테스트** 작성

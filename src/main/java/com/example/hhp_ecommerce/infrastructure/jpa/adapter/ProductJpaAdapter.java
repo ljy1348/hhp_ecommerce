@@ -37,4 +37,8 @@ public class ProductJpaAdapter implements ProductRepository {
     public List<Product> findAll() {
         return productJpaRepository.findAll().stream().map(ProductJpaEntity::toDomain).collect(Collectors.toList());
     }
+
+    public Product save(Product product) {
+        return productJpaRepository.save(ProductJpaEntity.toJpaEntity(product)).toDomain();
+    }
 }

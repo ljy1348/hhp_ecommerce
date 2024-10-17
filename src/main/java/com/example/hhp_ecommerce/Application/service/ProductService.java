@@ -35,6 +35,14 @@ public class ProductService {
         return productRepository.findAllByProducts(ids);
     }
 
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public Product saveQuantity(Product product) {
+        return productQuantityRepository.save(product);
+    }
+
     public Product getProductDetail(Long id) {
         Product product1 = productRepository.getById(id);
         Product product2 = productQuantityRepository.getById(id);
