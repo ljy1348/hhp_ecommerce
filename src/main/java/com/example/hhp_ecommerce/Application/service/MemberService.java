@@ -11,8 +11,12 @@ public class MemberService {
 
     private final PointRepository pointRepository;
 
-    public Member pointLookup(long memberId) {
+    public Member pointLookupWithLock(long memberId) {
         return pointRepository.findByIdWithLock(memberId);
+    }
+
+    public Member pointLookup(long memberId) {
+        return pointRepository.findById(memberId);
     }
 
     public Member pointSave(Member member) {
