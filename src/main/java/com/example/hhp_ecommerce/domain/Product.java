@@ -16,6 +16,11 @@ public class Product extends BaseTime{
         this.quantity = quantity;
     }
 
+    public Product(long id, String detail) {
+        this.id = id;
+        this.detail = detail;
+    }
+
     public Product(long id, int quantity, int price) {
         this.id = id;
         this.quantity = quantity;
@@ -25,6 +30,21 @@ public class Product extends BaseTime{
     public Product(long id, String name, int price) {
         this.id = id;
         this.name = name;
+        this.price = price;
+    }
+
+    public Product(long id, String name, int price, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Product(long id, String name, String detail, int quantity, int price) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.quantity = quantity;
         this.price = price;
     }
 

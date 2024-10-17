@@ -6,6 +6,7 @@ import com.example.hhp_ecommerce.domain.repository.OrderRepository;
 import com.example.hhp_ecommerce.domain.repository.ProductRepository;
 import com.example.hhp_ecommerce.infrastructure.jpa.entity.ProductJpaEntity;
 import com.example.hhp_ecommerce.infrastructure.jpa.repository.OrderJpaRepository;
+import com.example.hhp_ecommerce.infrastructure.jpa.repository.ProductDetailJpaRepository;
 import com.example.hhp_ecommerce.infrastructure.jpa.repository.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,13 @@ public class ProductJpaAdapter implements ProductRepository {
         return productJpaEntities.stream()
                 .map(ProductJpaEntity::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    public Product getById(Long id) {
+        return productJpaRepository.getById(id).toDomain();
+    }
+
+    public List<Product> findAll() {
+        return productJpaRepository.findAll().stream().map(ProductJpaEntity::toDomain).collect(Collectors.toList());
     }
 }

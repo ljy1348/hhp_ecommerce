@@ -36,4 +36,12 @@ public class ProductQuantityJapAdapter implements ProductQuantityRepository {
                 .map(ProductQuantityJpaEntity::toDomain).collect(Collectors.toList());
     }
 
+    @Override
+    public Product getById(Long id) {
+        return productQuantityJpaRepository.getById(id).toDomain();
+    }
+
+    public List<Product> findAll() {
+        return productQuantityJpaRepository.findAll().stream().map(ProductQuantityJpaEntity::toDomain).collect(Collectors.toList());
+    }
 }

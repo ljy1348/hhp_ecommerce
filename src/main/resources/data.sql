@@ -14,11 +14,18 @@ create table if not exists point (
 , point int
 );
 
+create table if not exists product_detail (
+                                     id int primary key
+    , detail text
+);
+
 
 
 INSERT INTO product (name, price) VALUES ('Product A', 1000);
 INSERT INTO product (name, price) VALUES ('Product B', 1500);
 INSERT INTO product (name, price) VALUES ('Product C', 2000);
+
+insert into product_detail (id, detail) values(1, '상품 a의 상세 설명');
 
 INSERT INTO product_quantity (id, quantity) VALUES (1, 10);
 INSERT INTO product_quantity (id, quantity) VALUES (2, 10);

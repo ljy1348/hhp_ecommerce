@@ -10,6 +10,7 @@ import com.example.hhp_ecommerce.domain.Order;
 import com.example.hhp_ecommerce.domain.Payment;
 import com.example.hhp_ecommerce.interfaces.dto.payment.PaymentRequestDto;
 import com.example.hhp_ecommerce.interfaces.dto.payment.PaymentResponseDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class PaymentFacade implements PaymentUseCase {
     private final MemberService memberService;
     private final PaymentService paymentService;
 
+    @Transactional
     public PaymentResponseDto payment(PaymentRequestDto paymentRequestDto) {
         Payment payment = PaymentMapper.PaymentRequestDtoToDomain(paymentRequestDto);
         Order order = orderService.findById(payment.getOrderId());
