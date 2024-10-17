@@ -31,6 +31,7 @@ public class OrderFacade implements OrderUseCase {
         List<Product> orderProducts = ProductMapper.mapToProductList(orderRequestDto);
         List<Product> products = productService.findAllByProducts(orderProducts);
         List<Product> productQuantitys = productService.findAllProductQuantityWithLock(orderProducts);
+        System.out.println(productQuantitys.get(0).getQuantity());
         productService.isOrderQuantityAvailableAndUpdate(productQuantitys, orderProducts);
         List<Product> updateProducts = productService.updateOrderListWithProductPrices(products, orderProducts);
         int totalAmount = productService.calculateTotalPrice(updateProducts);

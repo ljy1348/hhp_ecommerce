@@ -8,6 +8,9 @@ import com.example.hhp_ecommerce.Application.service.ProductService;
 import com.example.hhp_ecommerce.domain.OrderProduct;
 import com.example.hhp_ecommerce.domain.Product;
 import com.example.hhp_ecommerce.infrastructure.jpa.repository.OrderJpaRepository;
+import com.example.hhp_ecommerce.infrastructure.jpa.repository.OrderProductJpaRepository;
+import com.example.hhp_ecommerce.infrastructure.jpa.repository.ProductJpaRepository;
+import com.example.hhp_ecommerce.infrastructure.jpa.repository.ProductQuantityJpaRepository;
 import com.example.hhp_ecommerce.interfaces.dto.product.ProductDetailDto;
 import com.example.hhp_ecommerce.interfaces.dto.product.ProductDto;
 import com.example.hhp_ecommerce.interfaces.dto.product.ProductListDto;
@@ -34,11 +37,17 @@ class ProductFacadeTest {
     private OrderProductService orderProductService;
 
     @Autowired
-    private OrderJpaRepository orderJpaRepository;
+    private OrderProductJpaRepository orderProductJpaRepository;
 
     @BeforeEach
     void setUpBeforeClass() throws Exception {
-        orderJpaRepository.deleteAll();
+        orderProductJpaRepository.deleteAll();
+        productService.saveQuantity(new Product(1L, 100));
+        productService.saveQuantity(new Product(2L, 100));
+        productService.saveQuantity(new Product(3L, 100));
+        productService.saveProduct(new Product(1L, "Product A", 100));
+        productService.saveProduct(new Product(2L, "Product B", 100));
+        productService.saveProduct(new Product(3L, "Product C", 100));
     }
 
 
@@ -64,6 +73,7 @@ class ProductFacadeTest {
         assertEquals("Product B", productList.products().get(1).productName());
         assertEquals("Product C", productList.products().get(2).productName());
     }
+
     @Test
     void testGetProductListTop5() {
         orderProductService.createOrderProductList(List.of(new OrderProduct(1L, 1L, 3, 400)

@@ -26,9 +26,6 @@ class CartFacadeTest {
     @Autowired
     private CartService cartService;
 
-    @Autowired
-    private ProductService productService;
-
     @BeforeEach
     void setUp() {
         CartProductDto dto = new CartProductDto(1L, 1L, 10);

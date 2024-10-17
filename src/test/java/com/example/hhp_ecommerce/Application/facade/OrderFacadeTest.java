@@ -37,14 +37,22 @@ class OrderFacadeTest {
     private OrderProductService orderProductService;
 
     @BeforeEach
-    void setUp() {
-        // 테스트를 위한 기본적인 데이터 셋업
-        // 기본적인 상품 추가, 재고 초기화 등
-        Product product1 = new Product(1L, "Product A", 5000, 100); // 상품 1: 재고 100, 가격 5000
-        Product product2 = new Product(2L, "Product B", 10000, 200); // 상품 2: 재고 200, 가격 10000
-        productService.saveProduct(product1);
-        productService.saveProduct(product2);
+    void setUpBeforeClass() throws Exception {
+        productService.saveQuantity(new Product(1L, 100));
+        productService.saveQuantity(new Product(2L, 200));
+        productService.saveProduct(new Product(1L, "Product A", 5000));
+        productService.saveProduct(new Product(2L, "Product B", 10000));
     }
+
+//    @BeforeEach
+//    void setUp() {
+//        // 테스트를 위한 기본적인 데이터 셋업
+//        // 기본적인 상품 추가, 재고 초기화 등
+//        Product product1 = new Product(1L, "Product A", 5000, 100); // 상품 1: 재고 100, 가격 5000
+//        Product product2 = new Product(2L, "Product B", 10000, 200); // 상품 2: 재고 200, 가격 10000
+//        productService.saveProduct(product1);
+//        productService.saveProduct(product2);
+//    }
 
     @Test
     void testOrder() {
