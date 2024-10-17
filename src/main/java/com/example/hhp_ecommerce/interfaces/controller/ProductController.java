@@ -34,8 +34,8 @@ public class ProductController {
     }
 
 //    상위 상품 조회
-@GetMapping("/list/popular")
-public ProductListDto getProductPopular() {
-    return productUseCase.getProductListTop5();
-}
+    @GetMapping("/list/popular")
+    public ProductListDto getProductPopular() {
+        return productUseCase.getProductListTop5();
+    }
 }
