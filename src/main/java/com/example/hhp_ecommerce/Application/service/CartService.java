@@ -3,6 +3,7 @@ package com.example.hhp_ecommerce.Application.service;
 import com.example.hhp_ecommerce.domain.Cart;
 import com.example.hhp_ecommerce.domain.Product;
 import com.example.hhp_ecommerce.domain.repository.CartRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class CartService {
 
     }
 
+    @Transactional
     public void deleteOrRemove(Cart cart) {
         try {
             Cart cart1 = getCartByProductId(cart.getMemberId(), cart.getProductId());

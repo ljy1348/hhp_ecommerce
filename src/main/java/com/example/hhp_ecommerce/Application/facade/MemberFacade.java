@@ -7,6 +7,7 @@ import com.example.hhp_ecommerce.domain.Member;
 import com.example.hhp_ecommerce.domain.repository.MemberRepository;
 import com.example.hhp_ecommerce.interfaces.dto.point.PointChargeDto;
 import com.example.hhp_ecommerce.interfaces.dto.point.PointResponseDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,17 @@ import org.springframework.stereotype.Service;
 public class MemberFacade implements MemberUseCase {
     private final MemberService memberService;
 
+    @Transactional
     @Override
     public PointResponseDto pointLookup(long userId) {
         return MemberMapper.domainToPointResponseDto(memberService.pointLookup(userId));
     }
 
+    @Transactional
     @Override
     public PointResponseDto pointCharge(PointChargeDto pointChargeDto) {
         Member charge = MemberMapper.PointChargeDtoToDomain(pointChargeDto);
-        Member member = memberService.pointLookup(charge.getId());
+        Member member = memberService.pointLookupWithLock(charge.getId());
         member.updatePoint(charge.getPoint());
         return MemberMapper.domainToPointResponseDto(memberService.pointSave(member));
     }
