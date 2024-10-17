@@ -4,6 +4,9 @@ import com.example.hhp_ecommerce.Application.usecase.CartUseCase;
 import com.example.hhp_ecommerce.interfaces.dto.cart.CartListDto;
 import com.example.hhp_ecommerce.interfaces.dto.cart.CartProductDto;
 import com.example.hhp_ecommerce.interfaces.dto.product.ProductDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +22,6 @@ public class CartController {
 
     private final CartUseCase cartUseCase;
 
-    // 장바구니 추가
     @PostMapping("/add")
     public CartListDto addCart(@RequestBody CartProductDto productDto) {
         return cartUseCase.addCart(productDto);
