@@ -38,26 +38,12 @@ public class ProductService {
         return new Product(product1.getId(), product1.getName(), product3.getDetail(), product2.getQuantity(), product1.getPrice());
     }
 
-    public List<Product> getProductList() {
-        List<Product> products = productRepository.findAll();
-        List<Product> products1 = productQuantityRepository.findAll();
+    public List<Product> findAllProduct() {
+        return productRepository.findAll();
+    }
 
-        // products1의 상품 아이디와 수량을 맵으로 변환 (id를 키로, 수량을 값으로)
-        Map<Long, Integer> productQuantityMap = products1.stream()
-                .collect(Collectors.toMap(Product::getId, Product::getQuantity));
-
-        // 새로운 상품 객체로 리스트 생성
-        List<Product> mergedProductList = products.stream()
-                .map(product -> {
-                    Integer quantity = productQuantityMap.get(product.getId()); // 동일한 상품 아이디에 해당하는 수량 가져오기
-                    if (quantity == null) {
-                        quantity = 0; // 수량이 없는 경우 기본값으로 0 설정
-                    }
-                    return new Product(product.getId(), product.getName(), product.getPrice(), quantity); // 새로운 상품 객체 생성
-                })
-                .collect(Collectors.toList());
-
-        return mergedProductList; // 새 상품 리스트 반환
+    public List<Product> findAllQuantity() {
+        return productQuantityRepository.findAll();
     }
 
     public List<Product> findAllProductQuantityWithLock(List<Product> products) {
@@ -80,6 +66,18 @@ public class ProductService {
 
             // 제품 수량을 차감
             product.updateQuantity(product.getQuantity() - orderProduct.getQuantity());
+        }
+    }
+
+    public void mergedProductAndQuantity(List<Product> products, List<Product> quantitys) {
+        for (Product quantity : quantitys) {
+            Product product = products.stream()
+                    .filter(p -> p.getId() == (quantity.getId()))
+                    .findFirst()
+                    .orElse(null);
+
+            // 제품 수량을 차감
+            product.updateQuantity(quantity.getQuantity());
         }
     }
 

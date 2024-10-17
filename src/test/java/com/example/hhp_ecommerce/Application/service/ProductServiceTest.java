@@ -1,6 +1,7 @@
 package com.example.hhp_ecommerce.Application.service;
 
 import com.example.hhp_ecommerce.domain.Product;
+import com.example.hhp_ecommerce.domain.repository.ProductDetailRepository;
 import com.example.hhp_ecommerce.domain.repository.ProductQuantityRepository;
 import com.example.hhp_ecommerce.domain.repository.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +26,8 @@ class ProductServiceTest {
 
     @Mock
     ProductQuantityRepository productQuantityRepository;
+    @Mock
+    ProductDetailRepository productDetailRepository;
 
     @InjectMocks
     ProductService productService;
@@ -124,4 +128,51 @@ class ProductServiceTest {
         // Then: 예상 총 가격과 실제 계산된 총 가격 비교
         assertEquals(6500, totalPrice);  // 예상 총 가격과 계산된 총 가격이 같은지 확인
     }
+
+    @Test
+    @DisplayName("상품 상세 설명 테스트")
+    public void testGetProductDetail() {
+        // 테스트할 데이터 준비
+        Long productId = 1L;
+
+        Product product1 = new Product(1L, "Product1", "", 0, 100);
+        Product product2 = new Product(1L, "", "", 50, 0); // 수량만 포함
+        Product product3 = new Product(1L, "", "Detailed description", 0, 0); // 상세 정보만 포함
+
+        // Mock 동작 설정: 각 레포지토리에서 호출 시 반환할 값을 정의
+        when(productRepository.getById(productId)).thenReturn(product1);
+        when(productQuantityRepository.getById(productId)).thenReturn(product2);
+        when(productDetailRepository.getProductDetail(productId)).thenReturn(product3);
+
+        // 메서드 실행
+        Product result = productService.getProductDetail(productId);
+
+        // 검증: 결과가 예상과 일치하는지 확인
+        assertNotNull(result);
+        assertEquals(product1.getId(), result.getId());
+        assertEquals(product1.getName(), result.getName());
+        assertEquals(product3.getDetail(), result.getDetail());
+        assertEquals(product2.getQuantity(), result.getQuantity());
+        assertEquals(product1.getPrice(), result.getPrice());
+    }
+
+    @Test
+    public void testMergedProductAndQuantity() {
+        // 테스트할 Product 리스트
+        Product product1 = new Product(1L, "Product1", 1000, 0);
+        Product product2 = new Product(2L, "Product2", 2000, 0);
+        List<Product> products = Arrays.asList(product1, product2);
+
+        // 수량 리스트 (quantitys 리스트)
+        Product quantity1 = new Product(1L, null, 0, 10);
+        Product quantity2 = new Product(2L, null, 0, 20);
+        List<Product> quantitys = Arrays.asList(quantity1, quantity2);
+
+        productService.mergedProductAndQuantity(products, quantitys);
+
+        assertEquals(10, products.get(0).getQuantity());
+        assertEquals(20, products.get(1).getQuantity());
+    }
+
+
 }
