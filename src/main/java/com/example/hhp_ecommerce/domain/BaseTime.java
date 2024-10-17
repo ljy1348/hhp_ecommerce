@@ -6,6 +6,6 @@ import java.time.LocalDateTime;
 
 @Getter
 public class BaseTime {
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+     LocalDateTime createDate;
+     LocalDateTime updateDate;
 }

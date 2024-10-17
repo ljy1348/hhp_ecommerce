@@ -1,6 +1,7 @@
 package com.example.hhp_ecommerce.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Product extends BaseTime{
@@ -25,5 +26,12 @@ public class Product extends BaseTime{
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public void updateQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("상품 수량이 부족합니다.");
+        }
+        this.quantity = quantity;
     }
 }

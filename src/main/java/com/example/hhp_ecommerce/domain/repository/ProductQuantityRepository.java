@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ProductQuantityRepository {
     public List<Product> findAllByProductId(List<Long> ids);
+    public List<Product> saveAll(List<Product> products);
 }

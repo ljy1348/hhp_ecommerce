@@ -31,13 +31,15 @@ public class OrderFacade implements OrderUseCase {
         List<Product> orderProducts = ProductMapping.mapToProductList(orderRequestDto);
         List<Product> products = productService.findAllByProducts(orderProducts);
         List<Product> productQuantitys = productService.findAllProductQuantitys(orderProducts);
-        List<Product> updateProducts = productService.updateOrderListWithProductPrices(products, orderProducts, productQuantitys);
+        productService.isOrderQuantityAvailableAndUpdate(productQuantitys, orderProducts);
+        List<Product> updateProducts = productService.updateOrderListWithProductPrices(products, orderProducts);
         int totalAmount = productService.calculateTotalPrice(updateProducts);
-        order.setTotalAmount(totalAmount);
+        order.updateTotalAmount(totalAmount);
         Order createOrder = orderService.createOrder(order);
         List<OrderProduct> orderProductList = orderProductService.setOrderIdtoProductList(updateProducts, createOrder);
         orderProductService.createOrderProductList(orderProductList);
-        createOrder.setStatus(Order.OrderStatus.PAYMENT_PENDING);
+        createOrder.updateStatus(Order.OrderStatus.PAYMENT_PENDING);
+        productService.saveAllProductQuantity(productQuantitys);
         orderService.updateOrder(createOrder);
         return OrderMapping.domainToOrderResponseDto(createOrder);
     }

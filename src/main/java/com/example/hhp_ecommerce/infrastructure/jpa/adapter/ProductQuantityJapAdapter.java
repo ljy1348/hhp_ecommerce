@@ -8,6 +8,7 @@ import com.example.hhp_ecommerce.infrastructure.jpa.repository.ProductQuantityJp
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,17 @@ public class ProductQuantityJapAdapter implements ProductQuantityRepository {
         return productQuantityJpaRepository.findAllById(ids).stream()
                 .map(ProductQuantityJpaEntity::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    public List<Product> saveAll(List<Product> products) {
+        List<ProductQuantityJpaEntity> jpaEntitys = new ArrayList<>();
+
+        for (Product product : products) {
+            jpaEntitys.add(ProductQuantityJpaEntity.toJpaEntity(product));
+        }
+
+        return productQuantityJpaRepository.saveAll(jpaEntitys).stream()
+                .map(ProductQuantityJpaEntity::toDomain).collect(Collectors.toList());
     }
 
 }

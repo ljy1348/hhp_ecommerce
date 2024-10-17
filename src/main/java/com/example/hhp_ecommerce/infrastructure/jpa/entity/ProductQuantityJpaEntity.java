@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class ProductQuantityJpaEntity {
         return new Product(this.id, this.quantity);
     }
 
-    public ProductQuantityJpaEntity toJpaEntity(Product product) {
+    public static ProductQuantityJpaEntity toJpaEntity(Product product) {
         return new ProductQuantityJpaEntity(product.getId(), product.getQuantity());
     }
 

@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -23,12 +25,22 @@ public class OrderJpaEntity extends BaseTimeEntity{
     private int totalAmount;
     private Order.OrderStatus status;
 
+    OrderJpaEntity(long id, long memberId, int totalAmount, Order.OrderStatus status, LocalDateTime createDate) {
+        this.id = id;
+        this.memberId = memberId;
+        this.totalAmount = totalAmount;
+        this.status = status;
+        this.createDate = createDate;
+    }
+
     public Order toDomain() {
         return new Order(
                 this.id,
                 this.memberId,
                 this.status
         ,this.totalAmount
+                ,this.createDate
+                ,this.updateDate
         );
     }
 
@@ -37,7 +49,8 @@ public class OrderJpaEntity extends BaseTimeEntity{
                 order.getId(),
                 order.getMemberId(),
                 order.getTotalAmount(),
-                order.getStatus()
+                order.getStatus(),
+                order.getCreateDate()
         );
     }
 

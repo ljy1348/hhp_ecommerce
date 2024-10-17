@@ -33,25 +33,25 @@ public class ProductService {
         return productQuantityRepository.findAllByProductId(productIds);
     }
 
-    public boolean isOrderQuantityAvailable(List<Product> products, List<Product> orderProducts) {
+    public List<Product> saveAllProductQuantity(List<Product> products) {
+        return productQuantityRepository.saveAll(products);
+    }
+
+    public void isOrderQuantityAvailableAndUpdate(List<Product> products, List<Product> orderProducts) {
         for (Product orderProduct : orderProducts) {
             Product product = products.stream()
-                    .filter(p -> p.getId() == (orderProduct.getId()))  // equals() 사용
+                    .filter(p -> p.getId() == (orderProduct.getId()))  // equals() 대신 == 사용 (long 타입일 때는 == 사용 가능)
                     .findFirst()
                     .orElse(null);
 
-            if (product == null || orderProduct.getQuantity() > product.getQuantity()) {
-                return false;  // 주문 수량이 제품 수량보다 많으면 false
-            }
+            // 제품 수량을 차감
+            product.updateQuantity(product.getQuantity() - orderProduct.getQuantity());
         }
-        return true;  // 모든 주문 제품의 수량이 허용되는 경우 true
     }
 
-    public List<Product> updateOrderListWithProductPrices(List<Product> products, List<Product> orderProducts, List<Product> productQuantityList) {
+    public List<Product> updateOrderListWithProductPrices(List<Product> products, List<Product> orderProducts) {
         List<Product> updatedOrderList = new ArrayList<>();
-        if (!isOrderQuantityAvailable(productQuantityList, orderProducts)) {
-            throw new IllegalArgumentException("품절된 상품이 있습니다.");
-        }
+
         for (Product orderProduct : orderProducts) {
             Product product = products.stream()
                     .filter(p -> p.getId() == orderProduct.getId())  // long 타입이므로 == 사용
