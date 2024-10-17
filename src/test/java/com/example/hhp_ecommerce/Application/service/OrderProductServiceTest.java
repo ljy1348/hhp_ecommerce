@@ -11,10 +11,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)  // JUnit 5에서 Mockito 사용을 위한 확장
 class OrderProductServiceTest {
@@ -61,7 +65,55 @@ class OrderProductServiceTest {
         assertEquals(1500, orderProduct2.getPrice());  // 가격이 1500인지 확인
     }
 
+    @Test
+    @DisplayName("주문 내역 상위 5개 상품 id 목록 얻기 테스트")
+    void getProductIdTop5_ShouldReturnTop5ProductIds() {
+        // Given
+        LocalDateTime endDate = LocalDateTime.now();
+        LocalDateTime startDate = endDate.minusDays(3);
+
+        List<OrderProduct> mockOrderProductList = Arrays.asList(
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 1L, 0, 0),
+                new OrderProduct(0, 2L, 0, 0),
+                new OrderProduct(0, 3L, 0, 0),
+                new OrderProduct(0, 3L, 0, 0),
+                new OrderProduct(0, 3L, 0, 0),
+                new OrderProduct(0, 4L, 0, 0),
+                new OrderProduct(0, 4L, 0, 0),
+                new OrderProduct(0, 5L, 0, 0),
+                new OrderProduct(0, 5L, 0, 0),
+                new OrderProduct(0, 5L, 0, 0),
+                new OrderProduct(0, 5L, 0, 0),
+                new OrderProduct(0, 6L, 0, 0),
+                new OrderProduct(0, 6L, 0, 0),
+                new OrderProduct(0, 6L, 0, 0),
+                new OrderProduct(0, 6L, 0, 0),
+                new OrderProduct(0, 6L, 0, 0)
+
+        );
+
+        // When
+        when(orderProductRepository.getOrderProductCreateDateBetween(any(), any())).thenReturn(mockOrderProductList);
+
+        // Act
+        List<Long> top5ProductIds = orderProductService.getProductIdTop5();
+
+        // Then
+        assertEquals(5, top5ProductIds.size());
+        assertEquals(1L, top5ProductIds.get(0));
+        assertEquals(6L, top5ProductIds.get(1));
+        assertEquals(5L, top5ProductIds.get(2));
+        assertEquals(3L, top5ProductIds.get(3));
+        assertEquals(4L, top5ProductIds.get(4));
+    }
 
 
 
-}
+
+
+    }

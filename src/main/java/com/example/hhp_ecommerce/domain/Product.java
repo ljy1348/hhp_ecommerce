@@ -54,4 +54,10 @@ public class Product extends BaseTime{
         }
         this.quantity = quantity;
     }
+
+    public void quantityCheck(int quantity) {
+        if (quantity > this.quantity) {
+            throw new RuntimeException("준비된 상품 수량을 초과합니다.");
+        }
+    }
 }

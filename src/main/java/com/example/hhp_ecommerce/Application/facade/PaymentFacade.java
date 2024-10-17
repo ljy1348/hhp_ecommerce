@@ -25,7 +25,7 @@ public class PaymentFacade implements PaymentUseCase {
     public PaymentResponseDto payment(PaymentRequestDto paymentRequestDto) {
         Payment payment = PaymentMapper.PaymentRequestDtoToDomain(paymentRequestDto);
         Order order = orderService.findById(payment.getOrderId());
-        Member member = memberService.pointLookup(order.getMemberId());
+        Member member = memberService.pointLookupWithLock(order.getMemberId());
         memberService.pointUse(member, order.getTotalAmount());
         order.updateStatus(Order.OrderStatus.PAYMENT_COMPLETED);
         Payment newPayment = new Payment(payment.getUserId(), payment.getOrderId(), order.getTotalAmount());

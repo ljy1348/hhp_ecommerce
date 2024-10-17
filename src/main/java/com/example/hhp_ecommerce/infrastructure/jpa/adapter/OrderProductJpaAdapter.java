@@ -10,6 +10,7 @@ import com.example.hhp_ecommerce.infrastructure.jpa.repository.OrderProductJpaRe
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,5 +33,9 @@ public class OrderProductJpaAdapter implements OrderProductRepository {
         return savedOrderProductEntities.stream()
                 .map(OrderProductJpaEntity::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    public List<OrderProduct> getOrderProductCreateDateBetween(LocalDateTime start, LocalDateTime end) {
+        return orderProductJpaRepository.findAllByCreateDateBetween(start, end).stream().map(orderProduct -> orderProduct.toDomain()).collect(Collectors.toList());
     }
 }

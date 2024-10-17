@@ -1,53 +1,44 @@
-[Step 5](#step-5)  
-[Step 6](#step-6)
+# 4주차
 
-# step 5
-# 마일스톤
+[step7 readme - API Swagger 기능 구현 및 캡쳐본 첨부](docs%2Fstep7.md)
 
-![img.png](img.png)
+### **`DEFAULT`**
+- 각 시나리오별 하기 **비즈니스 로직** 개발 및 **단위 테스트** 작성
+    - `e-commerce` : 상품 조회, 주문/결제 기능
+    - `concert` : 대기열 발급, 대기순번 조회, 좌석 예약 기능
 
-https://github.com/users/ljy1348/projects/4/views/1
+> **단위 테스트** 는 반드시 대상 객체/기능 에 대한 의존성만 존재해야 함
+>
 
-# 시퀀스 다이어그램
-1. 포인트 조회/충전  
-![point.png](point.png)
-2. 상품 주문 및 결제  
-![order.png](order.png)
-3. 장바구니 등록  
-![cart.png](cart.png)
+### **`STEP07`**
 
-# step 6
-# ERD
-![erd.png](erd.png)
+- API Swagger 기능 구현 및 캡쳐본 첨부 ( Readme )
+- 주요 비즈니스 로직 개발 및 단위 테스트 작성
 
-# 기술
-아키택처 - 클린 아키택처  
-```
-domain
-├── model
-└── repository
-application
-├── service
-└── pacade
-inter
-├── controller
-├── dto
-└── adapter
-infrastructure
-├── config
-├── repository
-    └─ entity
-└── client
-```
-db orm - jpa  
-test - JUnit & AssertJ  
-java - openjdk 17  
-db - h2  
+### **`STEP08`**
 
-# API 명세
+- 비즈니스 Usecase 개발 및 통합 테스트 작성
 
-![img_1.png](img_1.png)
+> API 의 완성이 목표가 아닌, 기본 및 주요 기능의 비즈니스 로직 및 유즈케이스는 구현이 완료 되어야 함. ( `Business Layer` )
+>
+
+> DB Index , 대용량 처리를 위한 개선 포인트 등은 추후 챕터에서 진행하므로 목표는 `기능 개발의 완료` 로 합니다. 최적화 작업 등을 고려하는 것 보다 모든 기능을 정상적으로 제공할 수 있도록 해주세요. 특정 기능을 왜 이렇게 개발하였는지 합당한 이유와 함께 기능 개발을 진행해주시면 됩니다.
 
 
-[swagger.json](swagger.json)
+# 3주차
+### **`STEP 05`**
 
+- 시나리오 선정 및 프로젝트 Milestone 제출
+- 시나리오 요구사항 별 분석 자료 제출
+
+  > 시퀀스 다이어그램, 플로우 차트 등
+>
+- 자료들을 리드미에 작성 후 PR 링크 제출
+
+### **`STEP 06`**
+
+- ERD 설계 자료 제출
+- API 명세 및 Mock API 작성
+- 자료들을 리드미에 작성 후 PR링크 제출 ( 채택할 기본 패키지 구조, 기술 스택 등 )
+
+[step4, 5 readme](docs%2Freadme.md)

@@ -1,5 +1,6 @@
 package com.example.hhp_ecommerce.Application.service;
 
+import com.example.hhp_ecommerce.domain.Cart;
 import com.example.hhp_ecommerce.domain.Product;
 import com.example.hhp_ecommerce.domain.repository.OrderProductRepository;
 import com.example.hhp_ecommerce.domain.repository.ProductDetailRepository;
@@ -30,6 +31,10 @@ public class ProductService {
         return productRepository.findAllByProducts(productIds);
     }
 
+    public List<Product> findAllByIds(List<Long> ids) {
+        return productRepository.findAllByProducts(ids);
+    }
+
     public Product getProductDetail(Long id) {
         Product product1 = productRepository.getById(id);
         Product product2 = productQuantityRepository.getById(id);
@@ -38,12 +43,24 @@ public class ProductService {
         return new Product(product1.getId(), product1.getName(), product3.getDetail(), product2.getQuantity(), product1.getPrice());
     }
 
+    public Product getProduct(Long id) {
+        return productRepository.getById(id);
+    }
+
+    public Product getQuantity(Long id) {
+        return productQuantityRepository.getById(id);
+    }
+
     public List<Product> findAllProduct() {
         return productRepository.findAll();
     }
 
     public List<Product> findAllQuantity() {
         return productQuantityRepository.findAll();
+    }
+
+    public List<Product> findAllQuantityByIds(List<Long> ids) {
+        return productQuantityRepository.findAllById(ids);
     }
 
     public List<Product> findAllProductQuantityWithLock(List<Product> products) {
@@ -78,6 +95,18 @@ public class ProductService {
 
             // 제품 수량을 차감
             product.updateQuantity(quantity.getQuantity());
+        }
+    }
+
+    public void mergedProductAndCart(List<Product> products, List<Cart> quantitys) {
+        for (Cart cart : quantitys) {
+            Product product = products.stream()
+                    .filter(p -> p.getId() == (cart.getProductId()))
+                    .findFirst()
+                    .orElse(null);
+
+            // 제품 수량을 차감
+            product.updateQuantity(cart.getQuantity());
         }
     }
 

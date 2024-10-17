@@ -9,4 +9,5 @@ public interface ProductQuantityRepository {
     public List<Product> saveAll(List<Product> products);
     public Product getById(Long id);
     public List<Product> findAll();
+    public List<Product> findAllById(List<Long> ids);
 }

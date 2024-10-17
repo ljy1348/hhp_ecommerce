@@ -34,16 +34,8 @@ public class ProductController {
     }
 
 //    상위 상품 조회
-@GetMapping("/list/popular")
-public ResponseEntity<ProductListDto> getProductPopular() {
-    ProductDto mock1 = new ProductDto(1, 10, "인기상품1", 100);
-    ProductDto mock2 = new ProductDto(1, 15, "인기상품2", 200);
-
-    List<ProductDto> products = new ArrayList<>();
-    products.add(mock1);
-    products.add(mock2);
-    ProductListDto productListDto = new ProductListDto(products);
-
-    return new ResponseEntity<>(productListDto, HttpStatus.OK);
-}
+    @GetMapping("/list/popular")
+    public ProductListDto getProductPopular() {
+        return productUseCase.getProductListTop5();
+    }
 }

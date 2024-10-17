@@ -20,9 +20,8 @@ public class OrderController {
     private final OrderUseCase orderUseCase;
 
     @PostMapping("")
-    public ResponseEntity<OrderResponseDto> addOrder(@RequestBody OrderRequestDto order) {
-        OrderResponseDto orderResponseDto = orderUseCase.order(order);
-        return new ResponseEntity<>(orderResponseDto, HttpStatus.OK);
+    public OrderResponseDto addOrder(@RequestBody OrderRequestDto order) {
+         return orderUseCase.order(order);
     }
 
 }
